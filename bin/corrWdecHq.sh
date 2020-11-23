@@ -1,0 +1,139 @@
+####
+#Copyright (c) Facebook, Inc. and its affiliates.
+#
+#This source code is licensed under the MIT license found in the
+#LICENSE file in the root directory of this source tree.
+#
+#!/usr/bin/env bash
+
+# Goal : See whether dropout can be seen as decreasing the decodable mutual information. Note that no dropout on zx heads
+# Hypothesis
+#   - The generalization gap will get smaller with larger dropout, and the DI[Z->X] will get smaller.
+
+experiment="corrWdecHq"
+
+source `dirname $0`/utils.sh
+
+#precomputed="$prfx""precomputed"
+precomputed=$experiment
+
+kwargs="trnsf_experiment=$precomputed
+experiment=$precomputed 
+dataset.kwargs.is_normalize=False
+dataset.kwargs.is_augment=False
+model.architecture.z_dim=512
+model.architecture.zy_kwargs.k_prune=0 
+datasize=all
+clfs=default
+model.norm_layer=identity
+model.n_skip=1
+train.kwargs.lr=1e-5
+train.optim=adam
+train.scheduling_mode=null
+dataset.kwargs.is_random_targets=False 
+train.monitor_best=tloss
+model.architecture.zy_kwargs.hidden_size=64
+model.architecture.n_heads=null
+model.architecture.zy_kwargs.n_hidden_layers=2
+model.architecture.zx_kwargs.dropout=0
+model.loss.beta=0
+train.trnsf_kwargs.max_epochs=100
+hydra.launcher.time=2000
+model=correlation
+is_skip_if_precomputed=False
+train.kwargs.is_continue_best=True
+$dev
+"
+
+kwargs_multi="
+run=0,1,2,3,4
+dataset=cifar10,svhn
+encoder=mlp,resnet18
+train.weight_decay=1e-6,1e-5,1e-4,1e-3,1e-2,0.1
+"
+
+# copying the folder 
+base="tmp_results/corrWdec"
+results="tmp_results/$experiment"
+
+if [[ ! -d "$results" ]]; then
+
+  echo "Folder does not exist, copying $base to $results"
+  cp -r $base $results
+
+fi  
+
+if [ "$is_plot_only" = false ] ; then
+  for kwargs1 in "" 
+  do
+
+    # precompute the transformer if not already done
+    python main.py is_precompute_trnsf=True $kwargs $kwargs_multi $kwargs1 -m &
+      
+  done
+fi
+
+wait 
+
+params="col_val_subset.data=[cifar10,svhn]
+col_val_subset.datasize=[all]
+col_val_subset.augment=[False]
+col_val_subset.rand=[False]
+col_val_subset.chckpnt=[tloss]
+col_val_subset.schedule=[null]
+col_val_subset.optim=[adam]
+col_val_subset.lr=[1e-5]
+col_val_subset.wdecay=[1e-6,1e-5,1e-4,1e-3,1e-2,0.1]
+col_val_subset.model=[correlation]
+col_val_subset.dropout=[0.]
+col_val_subset.encoder=[mlp,resnet18]
+col_val_subset.nskip=[1]
+col_val_subset.nheads=[null]
+col_val_subset.zdim=[512]
+"
+
+params=$params" col_val_subset.enc_zy_nhid=[64] 
+col_val_subset.enc_zy_kpru=[0] 
+col_val_subset.enc_zy_nlay=[2]
+"
+
+# ENCODER
+python aggregate.py \
+       experiment=$precomputed \
+       save_experiment="$experiment"/trnsf \
+       $params \
+       plot_generalization.col=encoder \
+       plot_generalization.x=wdecay \
+       plot_generalization.is_trnsf=True \
+       plot_generalization.is_logscale_x=True \
+       plot_aux_trnsf.x=wdecay \
+       plot_aux_trnsf.col=encoder \
+       plot_aux_trnsf.is_logscale_x=True \
+       plot_histories.col=wdecay \
+       plot_histories.style=encoder \
+       recolt_data.pattern_results=null \
+       mode=[save_tables,plot_aux_trnsf,plot_generalization,plot_histories]
+
+# CLASSIFIER
+python aggregate.py \
+       experiment=$experiment \
+       $params \
+       plot_generalization.col=encoder \
+       plot_generalization.x=wdecay \
+       plot_generalization.is_trnsf=False \
+       plot_generalization.is_logscale_x=True \
+       plot_metrics.x=wdecay \
+       plot_metrics.col=encoder \
+       plot_metrics.is_logscale_x=True \
+       recolt_data.pattern_histories=null \
+       mode=[save_tables,plot_metrics,plot_generalization]
+
+# CORRELATION PLOTS
+python aggregate.py \
+       experiment=$experiment \
+       save_experiment="$experiment"/trnsf \
+       is_recolt=False \
+       correlation_experiment.cause=wdecay \
+       correlation_experiment.is_logscale_x=True \
+       correlation_experiment.col_sep_plots=encoder \
+       mode=[correlation_experiment]

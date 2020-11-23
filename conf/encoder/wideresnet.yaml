@@ -1,0 +1,8 @@
+encoder:
+  name: wideresnet
+
+  architecture:
+    depth: 26
+    width: 10
+    norm_layer: null
+    

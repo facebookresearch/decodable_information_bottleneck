@@ -1,0 +1,4 @@
+clfs:
+  name: QsufHeatmapXL
+  nhiddens: [4,16,64,256,1024] 
+  nlayers: [1] 

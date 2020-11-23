@@ -1,0 +1,8 @@
+pandas
+numpy
+scikit-learn
+hydra-core
+skorch
+matplotlib
+seaborn
+hydra_colorlog

@@ -1,0 +1,14 @@
+Cause,-0.008989331499509895
+$\mathrm{H}_{\mathfrak{Q}}[\mathrm{X}|\mathrm{Z}] - \mathrm{H}_{\mathfrak{Q}}[\mathrm{Y}|\mathrm{Z}]$,-0.7452071737786025
+$\mathrm{H}_{\mathfrak{Q}}$$[\mathrm{X}|\mathrm{Z}]$ Further,
+$\mathrm{H}_{\mathfrak{Q}}$$[\mathrm{X}|\mathrm{Z}]$,-0.6666666666666667
+$\mathrm{H}_{\mathfrak{Q}}[\mathrm{X}|\mathrm{Z}] - \mathrm{H}_{\mathfrak{Q}}[\mathrm{Y}|\mathrm{Z}]$ Nofreeze,
+$\mathrm{H}_{\mathfrak{Q}}[\mathrm{X}|\mathrm{Z}] - \mathrm{H}_{\mathfrak{Q}}[\mathrm{Y}|\mathrm{Z}]$ Maxep,
+$\mathrm{H}_{\mathfrak{Q}}[\mathrm{X}|\mathrm{Z}] - \mathrm{H}_{\mathfrak{Q}}[\mathrm{Y}|\mathrm{Z}]$ Minep,
+"$\mathrm{H}_{\mathfrak{Q}}$$[\mathrm{X}|\mathrm{Z},\mathrm{Y}]$",
+Test $\mathrm{H}_{\mathfrak{Q}}[\mathrm{X}|\mathrm{Z}] - \mathrm{H}_{\mathfrak{Q}}[\mathrm{Y}|\mathrm{Z}]$ Test,
+Path Norm,-0.049696969696969705
+Final Grad. Var.,
+Entropy,-0.2775757575757576
+Sharp. Mag.,0.04180236461138775
+Varying,Z Dim.

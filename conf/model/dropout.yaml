@@ -1,0 +1,6 @@
+model:
+  name: "dropout"
+  Loss: ERMLoss
+  dropout: 0.5
+
+  

@@ -1,0 +1,4 @@
+clfs:
+  name: inchiddens
+  nhiddens: [2,8,32,128,512] 
+  nlayers: [1] 

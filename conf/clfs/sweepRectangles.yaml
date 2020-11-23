@@ -1,0 +1,7 @@
+clfs:
+  name: sweepRectangles
+  nlayers: [1,2,3,4,5] 
+  nhiddens: [32]
+
+  kwargs:
+    is_rectangle: True

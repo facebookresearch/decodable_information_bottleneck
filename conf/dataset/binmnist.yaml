@@ -1,0 +1,6 @@
+dataset:
+  name: binmnist
+  n_classes: 2
+  shape: [1,32,32]
+  n_train: 60000
+  type: imgs 

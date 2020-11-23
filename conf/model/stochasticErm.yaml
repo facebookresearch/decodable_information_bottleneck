@@ -1,0 +1,9 @@
+model:
+  name: stochasticErm
+  Loss: ERMLoss
+
+  architecture:
+    is_stochastic: True
+    n_test_samples: 12
+
+    

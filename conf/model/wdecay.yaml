@@ -1,0 +1,6 @@
+model:
+  name: wdecay
+  Loss: ERMLoss
+
+  architecture:
+    is_stochastic: False

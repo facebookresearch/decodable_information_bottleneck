@@ -1,0 +1,6 @@
+datasize :
+  name : e50
+  is_valid_all_epochs : true
+  n_examples: -1
+  max_epochs: 50
+  factor: 1

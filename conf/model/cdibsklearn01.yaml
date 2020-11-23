@@ -1,0 +1,18 @@
+model:
+  name: cdibsklearn01
+  Loss: DIBLossSklearn
+  
+  architecture:
+    is_stochastic: True
+    n_test_samples: 12
+
+  Q_zy:
+    hidden_size: 128
+    n_hidden_layers: 0
+
+  loss:
+    beta: 0.1
+    is_optimal_nuisance: True
+    n_per_head: 1
+    altern_minimax: 1
+    conditional: H_Q[X|Z]-H_Q[Y|Z]

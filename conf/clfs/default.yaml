@@ -1,0 +1,22 @@
+clfs:
+  name: default
+  nhiddens:  
+    - ${model.Q_zy.hidden_size}
+  nlayers: 
+    - ${model.Q_zy.n_hidden_layers}
+  kprune: 
+    - ${model.Q_zy.k_prune}
+  is_reinitialize: True
+  gamma_force_generalization: 0
+
+  kwargs:
+    seed: ${seed}
+    n_skip: ${model.n_skip}
+    z_dim: ${model.architecture.z_dim}
+    n_classes: ${model.architecture.n_classes}
+    n_test_samples: ${model.architecture.n_test_samples}
+    norm_layer: ${model.norm_layer}
+    activation: ${model.activation}
+    is_rectangle: ${model.Q_zy.is_rectangle} 
+    is_plot_activation: ${train.is_tensorboard}
+    is_mult_hid_input: False # whetehr to multiply nhiddens by zdim

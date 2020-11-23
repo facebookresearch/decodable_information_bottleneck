@@ -1,0 +1,14 @@
+model:
+  name: cdib3
+  Loss: DIBLoss
+  
+  architecture:
+    is_stochastic: True
+    n_test_samples: 12
+
+  loss:
+    beta: 3
+    is_optimal_nuisance: True
+    n_per_head: 1
+    altern_minimax: 5
+    conditional: H_Q[X|Z]-H_Q[Y|Z]

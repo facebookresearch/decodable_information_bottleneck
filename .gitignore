@@ -1,0 +1,58 @@
+# directories
+data/
+doc/
+*old*
+*backup*/
+*archive*
+*test*
+!utils/data
+src/
+results
+.vscode
+__MACOSX/
+logs
+*tmp*
+outputs*
+
+# Byte-compiled / optimized / DLL files
+*.egg-info
+__pycache__/
+*.py[cod]
+*.egg*
+.DS_Store
+.python-version
+
+# Jupyter Notebook
+.ipynb_checkpoints
+notebooks/
+
+# Environments
+venv
+
+# Git
+#.gitignore
+!.keep
+
+# Extensions
+*.pyc
+*.log
+*.logs
+*.tar
+*.zip
+*.tar
+*.sublime*
+*.swp
+*.out
+*.old
+*.idea
+*.bak
+*.npy
+*.txt
+*.sh
+*.ipynb
+
+
+
+!requirements.txt
+!bin/*.sh
+resultskeep/**/*.png

@@ -1,0 +1,3 @@
+clfs:
+  name: minilayers
+  nlayers: [0,2,5] 

@@ -1,0 +1,7 @@
+datasize :
+  name : debug
+  is_valid_all_epochs : false
+  n_examples: 50
+  batch_size: 32
+  max_epochs: 2
+  factor: 1

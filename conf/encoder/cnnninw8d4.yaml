@@ -1,0 +1,11 @@
+encoder:
+  name: cnnninw8d4
+
+  architecture:
+    mode: nin
+    block: nin
+    normalization: batchnorm 
+    is_chan_last: False
+    width: 8
+    depth: 4
+    dropout: ${model.dropout}

@@ -1,0 +1,10 @@
+encoder:
+  name: mlpxl
+
+  architecture:
+    hidden_size: [8192,8192,8192]
+    dropout: ${model.dropout}
+    n_hidden_layers: null # because gives list for hidden size you don't have to change that
+    seed: ${seed}
+    n_skip: ${model.n_skip}
+    k_prune: 0

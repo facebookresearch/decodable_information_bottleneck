@@ -1,0 +1,38 @@
+# return the trained models with main.py
+is_return: True
+
+train:
+  is_evaluate: False
+
+  # make sure not retraining anything nor deleting any files
+  clf_kwargs:
+    is_train: False
+    clean_after_run: Null
+
+  trnsf_kwargs:
+    is_train: False
+    clean_after_run: Null
+
+load_models:
+  base_dir: /private/home/yannd/projects/Decodable_Information_Bottleneck/
+  mode: ["plot_reps_clfs"]
+
+  kwargs:
+    save_dir: ${load_models.base_dir}results/${experiment}/
+    prfx: ""
+    dpi: 300
+
+  recolt_data:
+    clf_patterns: ???
+    encoders_param: ???
+    encoders_vals: ???
+
+  plot_reps_clfs:
+    n_mesh: 25
+    n_max_scatter: 300
+    filename: reps_clfs
+    delta: 0.5
+    is_invert_yaxis: False
+    diagonal_color: "tab:green"
+    get_title: "{normloglike:.0%} Log Like."
+    is_plot_test: False

@@ -1,0 +1,5 @@
+clfs:
+  name: sweepSparse
+  kprune: [0,2,4,6,8] 
+  nlayers: [3] 
+  nhiddens: [2048] 

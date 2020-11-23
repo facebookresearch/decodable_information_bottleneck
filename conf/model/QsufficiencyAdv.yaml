@@ -1,0 +1,15 @@
+model:
+  name: QsufficiencyAdv
+
+  architecture:
+    is_stochastic: True
+    n_test_samples: 12
+    n_heads: 10
+    altern_minimax: 3
+
+  loss:
+    beta: ${model.architecture.n_heads}
+    regularization_loss: "DI_F[Z->Y]"
+    n_epoch_beta_interp : 0 # interpolate exponentially 
+    factor_min_reg: 1 # use 1 to make sure that classification is low (i.e. has to classify using chance)
+  

@@ -1,0 +1,10 @@
+model:
+  name: vib
+  Loss: VIBLoss
+  
+  architecture:
+    is_stochastic: True
+    n_test_samples: 12
+
+  loss:
+    beta: 1

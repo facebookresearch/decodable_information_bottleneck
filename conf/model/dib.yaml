@@ -1,0 +1,15 @@
+model:
+  name: dib
+  Loss: DIBLoss
+  
+  architecture:
+    is_stochastic: True
+    n_test_samples: 12
+    is_wrap_batchnorm: True
+
+  loss:
+    beta: 1
+    is_optimal_nuisance: True
+    n_per_head: 3
+    altern_minimax: 3
+    z_norm_reg: 0

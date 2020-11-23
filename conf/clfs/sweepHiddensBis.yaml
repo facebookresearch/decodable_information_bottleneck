@@ -1,0 +1,4 @@
+clfs:
+  name: sweepHiddensBis
+  nhiddens: [1024,4096] 
+  nlayers: [1] 

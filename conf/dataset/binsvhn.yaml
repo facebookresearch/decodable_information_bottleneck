@@ -1,0 +1,6 @@
+dataset:
+  name: binsvhn
+  n_classes: 2
+  shape: [3,32,32]
+  type: imgs 
+  n_train: 73257

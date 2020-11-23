@@ -1,0 +1,7 @@
+datasize :
+  name : minidet
+  is_valid_all_epochs : false
+  n_examples: ${dataset.n_classes}
+  batch_size: 100000
+  max_epochs: 200 # 1000  
+  factor: 100 # used to multiply n_examples

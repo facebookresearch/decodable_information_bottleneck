@@ -1,0 +1,16 @@
+model:
+  name: understandHeads
+  
+  architecture:
+    is_stochastic: True
+    n_test_samples: 12
+    n_heads: 30
+
+  loss:
+    beta: ${model.architecture.n_heads}
+    regularization_loss: "DI_F[Z->N]"
+    n_epoch_beta_interp : 0 # no interpolation
+    is_sqrt_reg: True
+    factor_min_reg: 1
+    is_understand_heads: True
+  

@@ -1,0 +1,14 @@
+model:
+  name: cdibdet
+  Loss: DIBLoss
+  
+  architecture:
+    is_stochastic: False
+    n_test_samples: 1
+
+  loss:
+    beta: 0.1
+    is_optimal_nuisance: True
+    n_per_head: 3
+    altern_minimax: 5
+    conditional: H_Q[X|Z]-H_Q[Y|Z]

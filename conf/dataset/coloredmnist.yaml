@@ -1,0 +1,14 @@
+dataset:
+  name: coloredmnist
+  n_classes: 2
+  shape: [3,32,32]
+  n_train: 60000
+  type: imgs 
+
+  kwargs:
+    is_noisy_test : true
+    is_fixed  : True
+    noise : 0.1
+
+
+    

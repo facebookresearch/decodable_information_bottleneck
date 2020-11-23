@@ -1,0 +1,7 @@
+model:
+  name: batchnorm
+  Loss: ERMLoss
+
+  architecture:
+    is_stochastic: False
+    is_wrap_batchnorm: True

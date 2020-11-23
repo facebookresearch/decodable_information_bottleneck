@@ -1,0 +1,6 @@
+datasize :
+  name : e300
+  is_valid_all_epochs : true
+  n_examples: -1
+  max_epochs: 300
+  factor: 1

@@ -1,0 +1,19 @@
+model:
+  name: correlation
+  
+  architecture:
+    is_stochastic: True
+    n_test_samples: 12
+    is_correlation: True
+    is_logistic_std: True
+
+  loss:
+    beta: ${model.architecture.n_heads}
+    regularization_loss: "DI_F[Z->N]"
+    n_epoch_beta_interp : 0 # interpolate exponentially 
+    factor_min_reg: 1
+    is_correlation: ${model.architecture.is_correlation}
+    is_optimal_nuisance: True
+    is_sqrt_reg: False
+    n_per_head: 3
+  

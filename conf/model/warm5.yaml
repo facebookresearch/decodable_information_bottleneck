@@ -1,0 +1,19 @@
+model:
+  name: warm5
+  Loss: DIBLoss
+  
+  architecture:
+    is_stochastic: True
+    n_test_samples: 12
+
+  Q_zy:
+    hidden_size: 128
+    n_hidden_layers: 0
+
+  loss:
+    beta: 1
+    n_per_head: 1
+    conditional: H_Q[X|Z]-H_Q[Y|Z]
+    altern_minimax: 0
+    is_optimal_nuisance: True
+    warm_Q_zx: 5 # will be multiplied by number of steps per epochs

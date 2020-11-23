@@ -1,0 +1,16 @@
+Cause,0.0926505638629738
+$\mathrm{H}_{\mathfrak{Q}}[\mathrm{X}|\mathrm{Z}] - \mathrm{H}_{\mathfrak{Q}}[\mathrm{Y}|\mathrm{Z}]$,0.05396825396825397
+$\mathrm{H}_{\mathfrak{Q}}$$[\mathrm{X}|\mathrm{Z}]$ Further,
+$\mathrm{H}_{\mathfrak{Q}}$$[\mathrm{X}|\mathrm{Z}]$,0.0888888888888889
+$\mathrm{H}_{\mathfrak{Q}}[\mathrm{X}|\mathrm{Z}] - \mathrm{H}_{\mathfrak{Q}}[\mathrm{Y}|\mathrm{Z}]$ Nofreeze,
+$\mathrm{H}_{\mathfrak{Q}}[\mathrm{X}|\mathrm{Z}] - \mathrm{H}_{\mathfrak{Q}}[\mathrm{Y}|\mathrm{Z}]$ Maxep,
+$\mathrm{H}_{\mathfrak{Q}}[\mathrm{X}|\mathrm{Z}] - \mathrm{H}_{\mathfrak{Q}}[\mathrm{Y}|\mathrm{Z}]$ Minep,
+"$\mathrm{H}_{\mathfrak{Q}}$$[\mathrm{X}|\mathrm{Z},\mathrm{Y}]$",
+Test $\mathrm{H}_{\mathfrak{Q}}[\mathrm{X}|\mathrm{Z}] - \mathrm{H}_{\mathfrak{Q}}[\mathrm{Y}|\mathrm{Z}]$ Test,
+Train D $\mathrm{H}_{\mathfrak{Q}^-}$$[\mathrm{X}|\mathrm{Z}]$,-0.14603174603174604
+Train D $\mathrm{H}_{\mathfrak{Q}^+}$$[\mathrm{X}|\mathrm{Z}]$,0.09841269841269842
+Path Norm,0.5746031746031747
+Final Grad. Var.,
+Entropy,-0.06666666666666667
+Sharp. Mag.,-0.44338625552826016
+Varying,Dropout

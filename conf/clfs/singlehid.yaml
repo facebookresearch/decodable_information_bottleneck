@@ -1,0 +1,4 @@
+clfs:
+  name: singlehid
+  nhiddens: [32,512,8192] 
+  nlayers: [1] 

@@ -1,0 +1,7 @@
+clfs:
+  name: pyramids
+  nlayers: [0,1,2,4,6,8] 
+  nhiddens: [2] 
+
+  kwargs:
+    is_pyramid: True

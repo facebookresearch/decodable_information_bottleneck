@@ -1,0 +1,7 @@
+datasize :
+  name : mini
+  is_valid_all_epochs : false
+  n_examples: ${dataset.n_classes}
+  batch_size: 16
+  max_epochs: 500 # 1000  
+  factor: 10 # used to multiply n_examples

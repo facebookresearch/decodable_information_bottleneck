@@ -1,0 +1,3 @@
+clfs:
+  name: nanolayers
+  nlayers: [2,3] 

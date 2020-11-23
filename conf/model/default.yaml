@@ -1,0 +1,64 @@
+model:
+  dropout: 0
+  n_skip: 0 #1
+  norm_layer: identity #batchnorm
+  activation: leaky_relu
+  gamma_force_generalization: 0
+  Loss: ???
+  is_equalize_epochs_minimax: True
+  is_joint: False
+
+  architecture:
+    n_classes: ${dataset.n_classes}
+    x_shape: ${dataset.shape}
+    z_dim: 1024
+    is_stochastic: False
+    n_test_samples: 1 # number of samples to compute expectation over z
+    is_limit_growth: False
+    is_wrap_batchnorm: False
+    
+  Q_zy:
+    seed: ${seed}
+    hidden_size: 128
+    n_hidden_layers: 1
+    k_prune: 0
+    n_skip: ${model.n_skip}
+    norm_layer: ${model.norm_layer}
+    dropout: ${model.dropout}
+    activation: ${model.activation}
+    is_rectangle: False
+    is_plot_activation: ${train.is_tensorboard}
+
+  Q_zx:
+    seed: ${seed}
+    hidden_size: ${model.Q_zy.hidden_size} 
+    n_hidden_layers: ${model.Q_zy.n_hidden_layers} 
+    k_prune: ${model.Q_zy.k_prune} 
+    n_skip: ${model.n_skip}
+    norm_layer: ${model.norm_layer}
+    dropout: ${model.dropout}
+    activation: ${model.activation}
+    is_rectangle: ${model.Q_zy.is_rectangle} 
+    is_plot_activation: ${train.is_tensorboard}
+
+  loss:
+    n_per_target: null
+    beta: 1
+    n_per_head: 3
+    conditional: null
+    n_classes: ${model.architecture.n_classes}
+    z_dim: ${model.architecture.z_dim}
+    altern_minimax: 0
+    is_optimal_nuisance: True
+    seed: ${seed}
+    is_zx_only: False
+    is_use_y_as_n: False
+    warm_Q_zx: 1 # will be multiplied by number of steps per epochs
+    threshold_suff: "inf"
+    is_higher: False
+    z_norm_reg: 0.
+    weight_kl: null
+    is_wrap_batchnorm: False
+  
+
+  

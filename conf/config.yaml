@@ -1,0 +1,197 @@
+defaults:
+  - hydra/launcher : submitit
+  - hydra/job_logging: colorlog
+  - hydra/hydra_logging: colorlog
+
+  - dataset: default
+  - dataset: mnist
+
+  - encoder: mlp
+
+  - model : default
+  - model : cdib
+
+  - clfs : default # do that such that only replaces the second
+  - clfs : default 
+
+  - additional : none
+
+  - datasize : default
+  - datasize : all
+
+# GENERAL
+paths:
+  data: /private/home/yannd/data/
+  base_dir: /private/home/yannd/projects/Decodable_Information_Bottleneck/
+  name: ${experiment}/{hyperparam_path}/run_${run}/ # cannot start directly by {}
+  trnsf_dirnames:
+    - ${paths.base_dir}tmp_results/${trnsf_experiment}/{hyperparam_path}/run_${run}/ # needs to be the same as chckpnt_dirnames.0 besides experiment
+    - .
+  chckpnt_dirnames: 
+    - ${paths.base_dir}tmp_results/${paths.name} # main dirname for saving
+    - . # where to load from when training
+  tensorboard_base_dir : ${paths.base_dir}tensorboard/
+  tensorboard_curr_dir : ${paths.tensorboard_base_dir}${paths.name}
+  
+
+experiment: ???
+trnsf_experiment : ${experiment} # where to load the transformer from 
+run: 0
+seed: 123 
+device: cuda
+csv_score_pattern: "{epoch},{mode}_{metric},{score}"
+is_random_labels_clf : False
+is_precompute_trnsf: False
+is_skip_trnsf_if_precomputed: True 
+is_skip_clf_if_precomputed: True
+is_return: False
+is_correlation: False
+is_correlation_Bob: False
+is_nvidia_smi: True
+
+# Training
+train:
+  ce_threshold: null
+  scheduling_factor: 100 # by how much to reduce learning rate during training
+  monitor_best: last
+  scheduling_mode: decay
+  weight_decay: 0
+  optim: adam
+  is_tensorboard: False
+  is_evaluate: True
+  lr_factor_zx: 50 # by how much to increase the learning rate for Q_zx (to make sure that can keep up with the encoder)
+  lr_clf: ${train.kwargs.lr}
+
+  freezer:
+    patterns: null
+    at: 1
+    
+  unfreezer:
+    patterns: null
+    at: 1
+
+  kwargs: # kwargs for both transformer and classifier
+    lr: 5e-5
+    iterator_train__shuffle: true
+    iterator_valid__shuffle: false
+    batch_size: ${datasize.batch_size}
+    is_continue_train: True # should be true if fairtask or when submitit will allow checkpoittin
+    is_progressbar: false
+    device: ${device}
+    seed: ${seed}
+    is_continue_best: False # whether to continue from the last best model already saved
+    is_train_delta_epoch: True # whether to train for `max_epochs - previous_epochs` when loading the model 
+
+  trnsf_kwargs:
+    max_epochs: ${datasize.max_epochs} 
+    is_train: True
+    monitor_best: ${train.monitor_best}
+    clean_after_run: training # don't clean everything because the classifier will have to load the model
+
+  clf_kwargs:
+    max_epochs: ${datasize.max_epochs} 
+    is_train: true
+    monitor_best: ${train.monitor_best}
+    clean_after_run: all
+
+# HYPERPARAMETERS TO LOG (in order)
+#! if you add something here you should run `python add_hyperparam.py` or `python add_hyperparam.py experiment=...` **before** changing the default of that value
+#! this will rearange the results and tensorboard folder by saving the previous models under the correct hyperparameter
+hyperparameters:
+  data: ${dataset.name}
+  datasize: ${datasize.name}
+  augment: ${dataset.kwargs.is_augment}
+  rand: ${dataset.kwargs.is_random_targets}
+  schedule: ${train.scheduling_mode}
+  optim: ${train.optim}
+  lr: ${train.kwargs.lr}
+  chckpnt: ${train.monitor_best}
+  wdecay: ${train.weight_decay}
+  model: ${model.name}
+  dropout: ${model.dropout}
+  encoder: ${encoder.name}
+  enc_zy_nhid: ${model.Q_zy.hidden_size}
+  enc_zy_nlay: ${model.Q_zy.n_hidden_layers}
+  enc_zy_kpru: ${model.Q_zy.k_prune}
+  enc_zx_nhid: ${model.Q_zx.hidden_size}
+  enc_zx_nlay: ${model.Q_zx.n_hidden_layers}
+  enc_zx_kpru: ${model.Q_zx.k_prune}
+  beta: ${model.loss.beta}
+  nskip: ${model.n_skip}
+  zdim: ${model.architecture.z_dim}
+  minimax: ${model.loss.altern_minimax}
+  mchead: ${model.loss.n_per_head}
+  clfs: ${clfs.name}
+
+# keys to ignore when printing the history
+keys_ignored: 
+  #- train_DIQ_xz
+  - train_H_Q_x
+  - train_H_Q_xCz
+  - train_d_H_Q_xCz
+  - valid_aux_loss
+  - train_I_xz
+  - train_DIQ_yz
+  - valid_H_Q_x
+  - valid_H_Q_xCz
+  - valid_d_H_Q_xCz
+  - valid_I_xz
+  - train_H_zCx
+  - valid_H_zCx
+  - valid_DIQ_yz
+  - valid_H_Q_y
+  - valid_H_Q_yCz
+  - train_z_std
+  - valid_z_std
+  - train_z_std_mean
+  - valid_z_std_mean
+  - train_I_q_xCz
+  - valid_I_q_xCz
+  - train_H_q_xCz
+  - valid_H_q_xCz
+  - valid_DIQ_xz
+  - valid_d_DIQ_xz
+  - valid_DIQ_xzCy
+  - train_DIQ_xzCy
+  - valid_h_delta_acc
+  - valid_z_norm
+  - valid_z_mean_norm
+  - train_z_mean_norm
+  - valid_z_std
+  - train_z_std
+    
+
+hydra:
+  launcher:
+    mem_limit: 32
+    time: 1440 # 24 hours
+    ngpus: 1
+    ntasks: 1
+    ncpus_task: 10
+    partition: learnfair # scavenge, dev
+
+    class: hydra_plugins.submitit.SubmititLauncher
+    params:
+      queue: slurm
+
+      folder: ${hydra.sweep.dir}/.${hydra.launcher.params.queue}
+
+      queue_parameters:
+        # slurm queue parameters
+        slurm:
+          num_gpus: ${hydra.launcher.ngpus}
+          ntasks_per_node: ${hydra.launcher.ntasks} # number of tasks on single machine
+          mem: ${hydra.launcher.mem_limit}GB
+          cpus_per_task: ${hydra.launcher.ncpus_task} 
+          time: ${hydra.launcher.time}
+          partition: ${hydra.launcher.partition}
+          constraint: "" # pascal | volta | volta32gb
+          nodes: 1 
+          signal_delay_s: 120
+          job_name: ${hydra.job.name}
+          max_num_timeout: 3
+          comment: ""
+          exclude: "learnfair0670,learnfair0483,learnfair0457,learnfair0605,learnfair0352,learnfair0295,learnfair0729,learnfair0607"
+
+        auto:
+          max_num_timeout: 3

@@ -1,0 +1,4 @@
+clfs:
+  name: nanosinglehid
+  nhiddens: [1,2,4,16] 
+  nlayers: [1] 

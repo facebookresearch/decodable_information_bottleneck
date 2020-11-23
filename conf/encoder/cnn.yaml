@@ -1,0 +1,13 @@
+encoder:
+  name: cnn
+
+  architecture:
+    dim: 2
+    mode: vanilla
+    conv: vanilla
+    block: simple
+    normalization: batchnorm 
+    is_chan_last: False
+    pool: max
+    tmp_channels: [16, 32, 64, 128] # each layer you divide size by 4 => at the end single
+    kernel_size: 3

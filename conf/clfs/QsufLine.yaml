@@ -1,0 +1,4 @@
+clfs:
+  name: QsufLine
+  nhiddens: [1,2,8,16,128] 
+  nlayers: [1] 

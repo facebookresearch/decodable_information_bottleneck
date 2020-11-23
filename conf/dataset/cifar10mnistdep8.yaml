@@ -1,0 +1,6 @@
+dataset:
+  name: cifar10mnistdep8
+  shape: [3,32,32]
+  n_classes: 10
+  n_train: 50000
+  type: imgs

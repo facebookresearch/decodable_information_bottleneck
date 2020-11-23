@@ -1,0 +1,3 @@
+clfs:
+  name: avg
+  gamma_force_generalization: 0

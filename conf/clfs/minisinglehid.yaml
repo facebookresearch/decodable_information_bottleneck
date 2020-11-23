@@ -1,0 +1,4 @@
+clfs:
+  name: minisinglehid
+  nhiddens: [1,2,8,256] 
+  nlayers: [1] 

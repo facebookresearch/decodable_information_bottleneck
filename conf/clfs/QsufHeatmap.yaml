@@ -1,0 +1,4 @@
+clfs:
+  name: QsufHeatmap
+  nhiddens: [1,2,4,8,16] 
+  nlayers: [1] 

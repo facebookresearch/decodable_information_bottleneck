@@ -1,0 +1,143 @@
+defaults:
+  - hydra/job_logging: colorlog
+  - hydra/hydra_logging: colorlog
+
+experiment: ???
+save_experiment: ${experiment} # name of the folder in which to save plots
+mode: [save_tables, plot_metrics] # plot_aux_trnsf, plot_histories, plot_generalization
+is_recolt: True
+col_val_subset : {}
+
+
+kwargs:
+  save_dir: ${recolt_data.base_dir}results/${save_experiment}/
+  prfx: ""
+  dpi: 300
+  pretty_renamer: {}
+
+recolt_data:
+  base_dir: /private/home/yannd/projects/Decodable_Information_Bottleneck/
+  pattern_results: tmp_results/${experiment}/**/clf_nhid_*/**/score.csv
+  pattern_aux_trnsf: tmp_results/${experiment}/**/transformer/**/score.csv
+  pattern_histories: tmp_results/${experiment}/**/transformer/last_epoch_history.json
+  metrics: 
+    - "test_accuracy"
+    - "test_loglike"
+    - "train_accuracy"
+    - "train_loglike"
+    - "train_sharp_mag"
+    - "train_var_grad"
+    - "train_path_norm"
+    - "train_y_pred_ent"
+    - train_d_H_Q_xCz
+    - train_H_Q_xCz_further
+    - train_H_Q_xCz
+    - train_d_H_Q_xCz_nofreeze
+    - train_d_H_Q_xCz_maxep
+    - train_d_H_Q_xCz_minep
+    - train_H_Q_xCzy
+    - test_d_H_Q_xCz_test
+    - train_d_H_Qm_xCz
+    - train_d_H_Qp_xCz
+
+     #"top5_acc",
+  aux_trnsf: 
+    - test_I_xz
+    - train_I_xz
+    - train_DIQ_yz
+    - test_DIQ_yz
+    - train_DIQ_xz
+    - train_d_DIQ_xz
+    - train_H_zCx
+    - test_H_zCx
+    - train_H_Q_yCz
+    - test_H_Q_yCz
+    - train_DIQ_xzCy
+    - train_acc
+    - test_acc
+    - train_loss
+    - test_loss
+    - train_loglike
+    - test_loglike
+    - train_H_Q_xCz
+    - train_d_H_Q_xCz
+    - train_H_Q_xCzy
+    - train_h_acc
+    - train_h_delta_acc
+    - train_z_norm
+    - test_z_norm
+    - train_z_mean_norm
+    - test_z_mean_norm
+    - train_z_std
+    - test_z_std
+
+plot_metrics:
+  x: ???
+  is_lines: True
+  is_merge_data_size: true
+  folder_col: null
+  col: null # only if is_merge_data_size
+  transformer_data: identity
+  is_plot_gaps: true
+  row: null
+
+plot_aux_trnsf:
+  x: ${plot_metrics.x}
+  style: null
+  is_merge_data_size: true
+  folder_col: null
+  col: null # only if is_merge_data_size
+  transformer_data: identity
+  logbase_x: 1
+  hue: ${plot_aux_trnsf.style}
+  is_plot_gaps: true
+  xticks: null
+  xticklabels: null
+  row: null
+
+plot_histories:
+  style: null
+  is_merge_data_size: true
+  folder_col: null
+  col: null # only if is_merge_data_size
+  transformer_data: identity
+  logbase_x: 1
+  hue: ${plot_histories.style}
+  xticks: null
+  xticklabels: null
+  row: null
+
+plot_generalization:
+  x: ???
+  is_trnsf: ??? # whether want to plot generalization for transformer or results
+  style: null
+  is_merge_data_size: true
+  folder_col: null
+  col: null # only if is_merge_data_size
+  transformer_data: identity
+  row: null
+  logbase_x: 1
+  xticks: null
+  xticklabels: null
+
+plot_superpose:
+  x: ???
+  is_trnsf: ??? # whether want to plot generalization for transformer or results
+  to_superpose: ???
+  value_name: ???
+  style: null
+  is_merge_data_size: true
+  folder_col: null
+  col: null # only if is_merge_data_size
+  transformer_data: identity
+  logbase_x: 1
+  xticks: null
+  xticklabels: null
+  row: null
+  
+correlation_experiment:
+  cause: ???
+  logbase_x: 1
+  col_sep_plots: null
+  xticks: null
+  xticklabels: null

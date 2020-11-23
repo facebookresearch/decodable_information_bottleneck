@@ -1,0 +1,9 @@
+datasize :
+  name : all
+  is_valid_all_epochs : true
+  n_examples: -1
+  batch_size: 256
+  max_epochs: 200  
+  factor: 1
+  n_examples_test: -1
+  

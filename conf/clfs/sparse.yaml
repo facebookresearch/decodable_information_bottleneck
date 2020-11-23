@@ -1,0 +1,6 @@
+clfs:
+  name: sparse
+  # make very large model to have a lot to prune out
+  nhiddens: [1024] 
+  kprune: [0,2,4,6,8,10] 
+  nlayers: [3] 

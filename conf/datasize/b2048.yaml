@@ -1,0 +1,7 @@
+datasize :
+  name : b2048
+  is_valid_all_epochs : true
+  n_examples: -1
+  batch_size: 2048
+  max_epochs: 200  
+  factor: 1

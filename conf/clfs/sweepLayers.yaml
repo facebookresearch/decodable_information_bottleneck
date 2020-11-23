@@ -1,0 +1,4 @@
+clfs:
+  name: sweepLayers
+  nlayers: [1,2,3,4,5] 
+  nhiddens: [128]

@@ -1,0 +1,9 @@
+dataset:
+  name: mnist
+  n_classes: 10
+  shape: [1,32,32]
+  n_train: 60000
+  type: imgs 
+
+
+    

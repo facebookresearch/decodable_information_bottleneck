@@ -1,0 +1,22 @@
+dataset:
+  is_use_distractor: False
+  valid_size: 0.1
+  type: ???
+
+  # which dataset to use for train, valid, test.
+  # e.g. valid: train means you should validate on training set
+  valid: valid 
+  train: train
+  test: test
+
+  kwargs:
+    is_return_index: True
+    root: ${paths.data}
+    is_random_targets: False
+    seed : ${seed}
+    translation: 4
+    is_flip: True
+    rotation: 15
+    is_normalize: True
+    is_augment: False
+    

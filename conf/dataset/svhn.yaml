@@ -1,0 +1,6 @@
+dataset:
+  name: svhn
+  n_classes: 10
+  shape: [3,32,32]
+  type: imgs 
+  n_train: 73257

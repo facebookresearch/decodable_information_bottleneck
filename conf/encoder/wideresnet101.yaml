@@ -1,0 +1,7 @@
+encoder:
+  name: wideresnet101
+
+  architecture:
+    pretrained: False
+    norm_layer: null
+    
